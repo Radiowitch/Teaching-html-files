@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Busy Market — English Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --fog: #8b8fa8;
+    --paper: #fdf6ec;
+    --card: #fffdf8;
+    --accent: #b85c20;
+    --glow: #f0c080;
+    --success: #2d6a4f;
+    --success-bg: #d8f3dc;
+    --warn: #7b4f12;
+    --warn-bg: #fde8c8;
+    --info: #1a4a7a;
+    --info-bg: #dbeafe;
+    --border: rgba(184,92,32,0.15);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b85c20' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .subject-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fog);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 em { font-style: italic; font-weight: 400; }
+  .header p { font-size: 14px; color: var(--fog); font-weight: 300; }
+
+  .progress-bar-wrap {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 50px;
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(184,92,32,0.1);
+    border-radius: 50px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--glow));
+    border-radius: 50px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .progress-label { font-size: 12px; color: var(--fog); white-space: nowrap; font-weight: 500; }
+
+  .section {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: box-shadow 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+
+  .section:focus-within { box-shadow: 0 0 0 3px rgba(184,92,32,0.08); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .part-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fog); }
+
+  .badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 50px; }
+  .badge-time { background: var(--info-bg); color: var(--info); }
+  .badge-tip { background: var(--success-bg); color: var(--success); }
+  .badge-warn { background: var(--warn-bg); color: var(--warn); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-intro { font-size: 14px; color: var(--fog); line-height: 1.7; margin-bottom: 1.25rem; }
+
+  .question { margin-bottom: 1.25rem; }
+
+  .question label { display: block; font-size: 15px; line-height: 1.6; color: var(--ink); margin-bottom: 0.5rem; }
+  .question label .qnum { font-weight: 500; color: var(--accent); margin-right: 4px; }
+
+  input[type="text"], textarea {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(184,92,32,0.2);
+    padding: 0.4rem 0;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+
+  input[type="text"]:focus { border-bottom-color: var(--accent); }
+
+  textarea {
+    border: 1.5px solid rgba(184,92,32,0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    min-height: 90px;
+    resize: vertical;
+    margin-top: 0.25rem;
+  }
+
+  textarea:focus { border-color: var(--accent); }
+  textarea.tall { min-height: 150px; }
+
+  .wordbank-grid { margin: 0.75rem 0 1rem; }
+  .wordbank-group { margin-bottom: 0.85rem; }
+
+  .wordbank-group-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fog);
+    margin-bottom: 0.4rem;
+  }
+
+  .words { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .word {
+    background: rgba(184,92,32,0.06);
+    border: 0.5px solid rgba(184,92,32,0.18);
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 13px;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .word:hover { background: rgba(184,92,32,0.12); }
+  .word.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .frame {
+    background: rgba(184,92,32,0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+    color: var(--fog);
+    line-height: 1.8;
+    margin: 0.75rem 0 0.5rem;
+    font-style: italic;
+  }
+
+  .frame strong { color: var(--ink); font-style: normal; font-weight: 500; }
+
+  .tip-box {
+    background: var(--success-bg);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 13px;
+    color: var(--success);
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .sense-box {
+    background: rgba(184,92,32,0.05);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 13px;
+    color: var(--warn);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    border: 0.5px solid rgba(184,92,32,0.2);
+  }
+
+  hr { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+
+  .section-complete {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--success-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .section-complete svg {
+    width: 12px; height: 12px;
+    stroke: var(--success);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .save-wrap { text-align: center; margin: 2rem 0; }
+
+  .save-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.85rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .save-btn:hover { background: #8f4518; transform: translateY(-1px); }
+  .save-btn:active { transform: translateY(0); }
+  .save-note { font-size: 12px; color: var(--fog); margin-top: 0.6rem; }
+
+  .saved-panel {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-top: 1.5rem;
+    display: none;
+  }
+
+  .saved-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .saved-entry { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--border); }
+  .saved-entry:last-child { border-bottom: none; margin-bottom: 0; }
+  .saved-q { font-size: 12px; color: var(--fog); margin-bottom: 0.25rem; font-weight: 500; }
+  .saved-a { font-size: 14px; color: var(--ink); line-height: 1.7; white-space: pre-wrap; }
+  .saved-a em { color: var(--fog); font-style: italic; }
+
+  .print-btn {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1.25rem;
+  }
+
+  .print-btn:hover { background: var(--accent); color: #fff; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .save-wrap, .progress-bar-wrap { display: none; }
+    .saved-panel { display: block !important; border: none; }
+    input, textarea { border: none !important; }
+  }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.8rem; }
+    .section { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <p class="subject-tag">CIE IGCSE English 0500 · Descriptive Writing</p>
+    <h1>The <em>busy market</em></h1>
+    <p>A guided writing session · approximately 1 hour</p>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <span class="progress-label" id="progress-text">0 of 12 questions answered</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="section" id="sec1">
+    <div class="section-complete" id="check1">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-meta">
+      <span class="part-label">Part 1</span>
+      <span class="badge badge-time">5 minutes</span>
+    </div>
+    <h2 class="section-title">What do you picture?</h2>
+    <p class="section-intro">Close your eyes for a moment and imagine a busy market or street food stall. It could be somewhere you have been, or somewhere you imagine. Answer in a few words — there are no wrong answers.</p>
+
+    <div class="question">
+      <label><span class="qnum">1.</span> Where is the market? (a city street, an indoor hall, a night market, a beach...)</label>
+      <input type="text" id="q1" placeholder="Write your answer here…" />
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">2.</span> Is it day or night? What is the weather like?</label>
+      <input type="text" id="q2" placeholder="Write your answer here…" />
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">3.</span> Write ONE word that describes the feeling of being there.</label>
+      <input type="text" id="q3" placeholder="Write your answer here…" />
+    </div>
+
+    <div class="tip-box">These are your ideas. You can use them throughout your writing.</div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="section" id="sec2">
+    <div class="section-complete" id="check2">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-meta">
+      <span class="part-label">Part 2</span>
+      <span class="badge badge-tip">Read through before writing</span>
+    </div>
+    <h2 class="section-title">Words to help you write</h2>
+    <p class="section-intro">Tap any word you like to highlight it. Then choose your three favourites below.</p>
+
+    <div class="wordbank-grid">
+      <div class="wordbank-group">
+        <p class="wordbank-group-title">What it looks like</p>
+        <div class="words">
+          <span class="word" onclick="toggleWord(this)">crowded</span>
+          <span class="word" onclick="toggleWord(this)">colourful</span>
+          <span class="word" onclick="toggleWord(this)">bright</span>
+          <span class="word" onclick="toggleWord(this)">dazzling</span>
+          <span class="word" onclick="toggleWord(this)">steaming</span>
+          <span class="word" onclick="toggleWord(this)">overflowing</span>
+          <span class="word" onclick="toggleWord(this)">tangled</span>
+          <span class="word" onclick="toggleWord(this)">glittering</span>
+          <span class="word" onclick="toggleWord(this)">heaped</span>
+          <span class="word" onclick="toggleWord(this)">narrow</span>
+          <span class="word" onclick="toggleWord(this)">flickering</span>
+          <span class="word" onclick="toggleWord(this)">bustling</span>
+        </div>
+      </div>
+      <div class="wordbank-group">
+        <p class="wordbank-group-title">What it sounds like</p>
+        <div class="words">
+          <span class="word" onclick="toggleWord(this)">sizzling</span>
+          <span class="word" onclick="toggleWord(this)">shouting</span>
+          <span class="word" onclick="toggleWord(this)">laughter</span>
+          <span class="word" onclick="toggleWord(this)">clattering</span>
+          <span class="word" onclick="toggleWord(this)">hissing</span>
+          <span class="word" onclick="toggleWord(this)">chatter</span>
+          <span class="word" onclick="toggleWord(this)">music</span>
+          <span class="word" onclick="toggleWord(this)">drumming</span>
+          <span class="word" onclick="toggleWord(this)">calls</span>
+          <span class="word" onclick="toggleWord(this)">crackling</span>
+        </div>
+      </div>
+      <div class="wordbank-group">
+        <p class="wordbank-group-title">What it smells like</p>
+        <div class="words">
+          <span class="word" onclick="toggleWord(this)">spice</span>
+          <span class="word" onclick="toggleWord(this)">smoke</span>
+          <span class="word" onclick="toggleWord(this)">sweetness</span>
+          <span class="word" onclick="toggleWord(this)">grease</span>
+          <span class="word" onclick="toggleWord(this)">charcoal</span>
+          <span class="word" onclick="toggleWord(this)">freshness</span>
+          <span class="word" onclick="toggleWord(this)">heat</span>
+          <span class="word" onclick="toggleWord(this)">salt</span>
+          <span class="word" onclick="toggleWord(this)">garlic</span>
+        </div>
+      </div>
+      <div class="wordbank-group">
+        <p class="wordbank-group-title">Movement and energy</p>
+        <div class="words">
+          <span class="word" onclick="toggleWord(this)">rushing</span>
+          <span class="word" onclick="toggleWord(this)">weaving</span>
+          <span class="word" onclick="toggleWord(this)">pressing</span>
+          <span class="word" onclick="toggleWord(this)">pushing</span>
+          <span class="word" onclick="toggleWord(this)">darting</span>
+          <span class="word" onclick="toggleWord(this)">swirling</span>
+          <span class="word" onclick="toggleWord(this)">spilling</span>
+          <span class="word" onclick="toggleWord(this)">overflowing</span>
+        </div>
+      </div>
+      <div class="wordbank-group">
+        <p class="wordbank-group-title">Feelings</p>
+        <div class="words">
+          <span class="word" onclick="toggleWord(this)">overwhelmed</span>
+          <span class="word" onclick="toggleWord(this)">excited</span>
+          <span class="word" onclick="toggleWord(this)">alive</span>
+          <span class="word" onclick="toggleWord(this)">lost</span>
+          <span class="word" onclick="toggleWord(this)">curious</span>
+          <span class="word" onclick="toggleWord(this)">hungry</span>
+          <span class="word" onclick="toggleWord(this)">dazzled</span>
+          <span class="word" onclick="toggleWord(this)">small</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="question">
+      <label><span class="qnum">4.</span> Pick your three favourite words from the whole list.</label>
+      <input type="text" id="q4a" placeholder="Word 1…" style="margin-bottom:8px;" />
+      <input type="text" id="q4b" placeholder="Word 2…" style="margin-bottom:8px;" />
+      <input type="text" id="q4c" placeholder="Word 3…" />
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="section" id="sec3">
+    <div class="section-complete" id="check3">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-meta">
+      <span class="part-label">Part 3</span>
+      <span class="badge badge-time">15 minutes</span>
+    </div>
+    <h2 class="section-title">Complete the sentences</h2>
+    <p class="section-intro">Use the word bank to help you. You can also use your own words. Fill in the blanks — there is no single right answer.</p>
+
+    <div class="sense-box">Remember: after "smelled of" or "full of" — use a noun (a thing word), not a describing word. For example: smelled of <strong>spice</strong>, not smelled of <strong>spicy</strong>.</div>
+
+    <div class="question">
+      <label><span class="qnum">5.</span> Describe what you see when you first arrive.</label>
+      <div class="frame">The market was ________ with people. Everywhere I looked there were ________ and ________.</div>
+      <textarea id="q5" placeholder="Write your sentence here…"></textarea>
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">6.</span> Describe the colours around you.</label>
+      <div class="frame">The stalls were filled with ________ colours — ________, ________, and ________.</div>
+      <textarea id="q6" placeholder="Write your sentence here…"></textarea>
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">7.</span> Describe the sounds around you.</label>
+      <div class="frame">The air was filled with the sound of ________. Above it all, I could hear ________.</div>
+      <textarea id="q7" placeholder="Write your sentence here…"></textarea>
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">8.</span> Describe the smells.</label>
+      <div class="frame">The air smelled of ________ and ________. Every few steps, a new smell hit me — ________.</div>
+      <textarea id="q8" placeholder="Write your sentence here…"></textarea>
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">9.</span> Describe one specific stall or person in detail.</label>
+      <div class="frame">At one stall, a ________ was ________. The ________ in front of them was ________.</div>
+      <textarea id="q9" placeholder="Write your sentence here…"></textarea>
+    </div>
+
+    <div class="question">
+      <label><span class="qnum">10.</span> Describe how you feel standing in the middle of it all.</label>
+      <div class="frame">Standing in the middle of everything, I felt ________. It was as if ________.</div>
+      <textarea id="q10" placeholder="Write your sentence here…"></textarea>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="section" id="sec4">
+    <div class="section-complete" id="check4">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-meta">
+      <span class="part-label">Part 4</span>
+      <span class="badge badge-time">20 minutes</span>
+      <span class="badge badge-warn" style="margin-left:4px;">Use your sentences from Part 3</span>
+    </div>
+    <h2 class="section-title">Write your paragraph</h2>
+    <p class="section-intro">Take your sentences from Part 3 and join them into one flowing paragraph. Add joining words like <em>meanwhile, suddenly, everywhere, as if, and yet</em>. You can also add one new sentence of your own.</p>
+
+    <div class="frame"><strong>Start with this sentence if you need help beginning:</strong><br>The moment I stepped into the market, my senses were hit from every direction.</div>
+
+    <div class="question">
+      <label><span class="qnum">11.</span> Your paragraph:</label>
+      <textarea id="q11" class="tall" placeholder="Write your paragraph here…"></textarea>
+    </div>
+
+    <div class="tip-box">You have already written most of this in Part 3. This is just putting the pieces together and making them flow.</div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="section" id="sec5">
+    <div class="section-complete" id="check5">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-meta">
+      <span class="part-label">Part 5 · Extension</span>
+      <span class="badge badge-time">If time allows</span>
+    </div>
+    <h2 class="section-title">Go deeper</h2>
+
+    <div class="question">
+      <label><span class="qnum">12.</span> The crowd suddenly parts and you see something unexpected — a child, an old man, an animal, a strange object. Write two sentences describing it.</label>
+      <div class="frame">Through the crowd, I noticed ________. For a moment, everything else seemed to ________.</div>
+      <textarea id="q12" placeholder="Write your two sentences here…"></textarea>
+    </div>
+
+    <hr>
+
+    <div class="question">
+      <label><span class="qnum">13.</span> Look back at your paragraph. Find one describing word (adjective) and replace it with a stronger, more specific word from the word bank.</label>
+      <input type="text" id="q13" placeholder="e.g. loud → crackling" />
+    </div>
+  </div>
+
+  <div class="save-wrap">
+    <button class="save-btn" onclick="saveAnswers()">Save my answers</button>
+    <p class="save-note">Your answers will appear below and can be printed.</p>
+  </div>
+
+  <div class="saved-panel" id="savedPanel">
+    <h2>Your answers</h2>
+    <div id="savedContent"></div>
+    <button class="print-btn" onclick="window.print()">Print this page</button>
+  </div>
+
+</div>
+
+<script>
+  const questions = {
+    q1: "Where is the market?",
+    q2: "Day or night? Weather?",
+    q3: "One word for the feeling",
+    q4a: "Favourite word 1",
+    q4b: "Favourite word 2",
+    q4c: "Favourite word 3",
+    q5: "What you see when you arrive",
+    q6: "The colours around you",
+    q7: "The sounds around you",
+    q8: "The smells",
+    q9: "One specific stall or person",
+    q10: "How you feel in the middle of it",
+    q11: "Your paragraph",
+    q12: "Something unexpected — two sentences",
+    q13: "Word swap"
+  };
+
+  const allIds = ['q1','q2','q3','q4a','q4b','q4c','q5','q6','q7','q8','q9','q10','q11','q12','q13'];
+
+  function toggleWord(el) { el.classList.toggle('selected'); }
+
+  function updateProgress() {
+    let filled = 0;
+    allIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value.trim().length > 0) filled++;
+    });
+    const pct = Math.round((filled / allIds.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = filled + ' of ' + allIds.length + ' questions answered';
+
+    checkSection('check1', ['q1','q2','q3'], 3);
+    checkSection('check2', ['q4a','q4b','q4c'], 3);
+    checkSection('check3', ['q5','q6','q7','q8','q9','q10'], 6);
+    checkSection('check4', ['q11'], 1);
+    checkSection('check5', ['q12','q13'], 2);
+  }
+
+  function checkSection(checkId, ids, needed) {
+    let filled = 0;
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value.trim().length > 2) filled++;
+    });
+    const check = document.getElementById(checkId);
+    if (check) check.style.opacity = filled >= needed ? '1' : '0';
+  }
+
+  allIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateProgress);
+  });
+
+  function saveAnswers() {
+    const panel = document.getElementById('savedPanel');
+    const content = document.getElementById('savedContent');
+    content.innerHTML = '';
+
+    allIds.forEach(id => {
+      const el = document.getElementById(id);
+      const val = el ? el.value.trim() : '';
+      const label = questions[id] || id;
+      const entry = document.createElement('div');
+      entry.className = 'saved-entry';
+      entry.innerHTML = `<p class="saved-q">${label}</p><p class="saved-a">${val || '<em>No answer written yet</em>'}</p>`;
+      content.appendChild(entry);
+    });
+
+    const selectedWords = Array.from(document.querySelectorAll('.word.selected')).map(w => w.textContent);
+    if (selectedWords.length > 0) {
+      const entry = document.createElement('div');
+      entry.className = 'saved-entry';
+      entry.innerHTML = `<p class="saved-q">Words highlighted from the word bank</p><p class="saved-a">${selectedWords.join(', ')}</p>`;
+      content.appendChild(entry);
+    }
+
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
